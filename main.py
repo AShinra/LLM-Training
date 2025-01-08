@@ -31,7 +31,8 @@ if uploaded_file is not None:
 
     headers = get_headers(uploaded_file)
 
-    st.write(headers)
+    if headers is not None:
+        st.selectbox(label='Column Headers', options=headers)
 
 
     # # # Creating a form in the Streamlit app for user input
