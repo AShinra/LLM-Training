@@ -1,6 +1,7 @@
 import streamlit as st
 from langchain.llms import OpenAI
 from file_uploader import upload_xlsx_file
+from pre_process import get_headers
 
 # Defining a function to generate a response using the OpenAI model
 def generate_response(input_text):
@@ -26,15 +27,22 @@ openai_api_key = st.secrets["openai"]
 # get the uploaded file
 upload_file = upload_xlsx_file()
 
-# # Creating a form in the Streamlit app for user input
-with st.form('my_form'):
-    # Adding a text area for user input with a default prompt
-    text = st.text_area('Enter text:', '')
-    # Adding a submit button for the form
-    submitted = st.form_submit_button('Submit')
-    # Displaying a warning if the entered API key does not start with 'sk-'
-    if not openai_api_key.startswith('sk-'):
-        st.warning('Please enter your OpenAI API key!', icon='⚠')
-    # If the form is submitted and the API key is valid, generate a response
-    if submitted and openai_api_key.startswith('sk-'):
-        generate_response(f'{api_prompt()}\n\n{text}')
+if upload_file is not None:
+
+    headers = get_headers(upload_file)
+
+    st.write(headers)
+
+
+    # # # Creating a form in the Streamlit app for user input
+    # with st.form('my_form'):
+    #     # Adding a text area for user input with a default prompt
+    #     text = st.text_area('Enter text:', '')
+    #     # Adding a submit button for the form
+    #     submitted = st.form_submit_button('Submit')
+    #     # Displaying a warning if the entered API key does not start with 'sk-'
+    #     if not openai_api_key.startswith('sk-'):
+    #         st.warning('Please enter your OpenAI API key!', icon='⚠')
+    #     # If the form is submitted and the API key is valid, generate a response
+    #     if submitted and openai_api_key.startswith('sk-'):
+    #         generate_response(f'{api_prompt()}\n\n{text}')
