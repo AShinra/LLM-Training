@@ -16,7 +16,7 @@ def generate_response(input_text):
 
 def api_prompt():
     text = f'''Role: You are tasked to create a summary from the given article based on the following criteria
-    
+
                 "Read the following story or article carefully. Summarize it in a detailed and structured way, highlighting the key points, main events, and core themes. Ensure the summary captures:
 
                 1. The central idea or main argument.
@@ -47,27 +47,29 @@ if uploaded_file is not None:
         col1, col2, col3 = st.columns(3)
         with col1:
             selected_column = st.selectbox(label='Select Column to Summarize', options=headers)
-            if st.button('Submit'):
-                
-                _path = os.getcwd()
-                _file = f'{_path}/summarized_sample.xlsx'
-                wb = openpyxl.Workbook(_file)
-                wb.save(_file)
-                wb.close()
+        if st.button('Submit'):
+            
+            df['Summary'] = ''
+            for i in df.index:
+                content_to_summarize = df.loc[i, selected_column]
+                df.loc[i, 'Summary'] = generate_response(f'{api_prompt()}\n\n{content_to_summarize}')
+            
+            # create a blank file
+            _path = os.getcwd()
+            _file = f'{_path}/summarized_sample.xlsx'
+            wb = openpyxl.Workbook(_file)
+            wb.save(_file)
+            wb.close()
 
-                df['Summary'] = ''
-                for i in df.index:
-                    content_to_summarize = df.loc[i, selected_column]
-                    df.loc[i, 'Summary'] = generate_response(f'{api_prompt()}\n\n{content_to_summarize}')
-                
-                st.dataframe(df)
-                writer = pd.ExcelWriter(_file, engine='openpyxl', mode='a')
-                df.to_excel(writer, sheet_name='CLEANED', index=False)
-                writer.close()
+            # save the data in the previously created file
+            writer = pd.ExcelWriter(_file, engine='openpyxl', mode='a')
+            df.to_excel(writer, sheet_name='CLEANED', index=False)
+            writer.close()
 
-                result_file = open(_file, 'rb')
-                st.success(f':red[NOTE:] Downloaded file will go to the :red[Downloads Folder]')
-                st.download_button(label='📥 Download Excel File', data= result_file, file_name= f'summarized.xlsx')   
+            # download button to download the file
+            result_file = open(_file, 'rb')
+            st.success(f':red[NOTE:] Downloaded file will go to the :red[Downloads Folder]')
+            st.download_button(label='📥 Download Excel File', data= result_file, file_name= f'summarized.xlsx')   
 
 
 
