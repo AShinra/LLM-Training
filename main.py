@@ -15,7 +15,10 @@ def generate_response(input_text):
     return llm(input_text)
 
 def api_prompt():
-    text = f'''Role: You are tasked to create a summary from the given article based on the following criteria'''
+    text = f'''Role: You are tasked to create a summary from the given article based on the following criteria
+                1. Remove all unnecessary spaces from the summary.
+                2. Do not place the word Summary at the beginning of the summarized article.
+                3. Summary should revolve around the {client} and it's endorsers and spokespersons.'''
     return text
 
 client = 'Manulife'
