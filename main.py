@@ -8,14 +8,12 @@ def generate_response(input_text):
     # Initializing the OpenAI model with a specified temperature and API key
     llm = OpenAI(temperature=0.7, openai_api_key=openai_api_key)
     # Displaying the generated response as an informational message in the Streamlit app
-    st.write(llm(input_text))
+    # st.write(llm(input_text))
+    return llm(input_text)
 
 def api_prompt():
     text = '''Role: You are tasked to create a summary from the given article based on the following criteria
-                1. Create a summary based on the keywords mentioned
-                2. Output should be in json format
-                    {"Summary":""}
-                    '''
+                1. Create a summary based on the keywords mentioned'''
     return text
 
 # Setting the title of the Streamlit application
@@ -36,10 +34,11 @@ if uploaded_file is not None:
         with col1:
             selected_column = st.selectbox(label='Select Column to Summarize', options=headers)
             if st.button('Submit'):
+                df['Summary'] = ''
                 for i in df.index:
                     content_to_summarize = df.loc[i, selected_column]
-                    generate_response(f'{api_prompt()}\n\n{content_to_summarize}')
-
+                    df.loc[i, 'Summary'] = generate_response(f'{api_prompt()}\n\n{content_to_summarize}')
+                     
 
 
 
