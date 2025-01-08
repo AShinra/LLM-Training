@@ -38,16 +38,24 @@ if uploaded_file is not None:
             if st.button('Submit'):
                 for i in df.index:
                     content_to_summarize = df.loc[i, selected_column]
+                    generate_response(f'{api_prompt()}\n\n{content_to_summarize}')
+
+
+
+
+
+
+
 
                     # Creating a form in the Streamlit app for user input
-                    with st.form('my_form'):
+                    # with st.form('my_form'):
                         # Adding a text area for user input with a default prompt
-                        text = st.text_area('Enter text:', '')
+                        # text = st.text_area('Enter text:', '')
                         # Adding a submit button for the form
-                        submitted = st.form_submit_button('Submit')
+                        # submitted = st.form_submit_button('Submit')
                         # Displaying a warning if the entered API key does not start with 'sk-'
-                        if not openai_api_key.startswith('sk-'):
-                            st.warning('Please enter your OpenAI API key!', icon='⚠')
+                        # if not openai_api_key.startswith('sk-'):
+                        #     st.warning('Please enter your OpenAI API key!', icon='⚠')
                         # If the form is submitted and the API key is valid, generate a response
-                        if submitted and openai_api_key.startswith('sk-'):
-                            generate_response(f'{api_prompt()}\n\n{content_to_summarize}')
+                        # if submitted and openai_api_key.startswith('sk-'):
+                            # generate_response(f'{api_prompt()}\n\n{content_to_summarize}')
