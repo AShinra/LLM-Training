@@ -35,9 +35,7 @@ if uploaded_file is not None:
         col1, col2, col3 = st.columns(3)
         with col1:
             selected_column = st.selectbox(label='Select Column to Summarize', options=headers)
-            Process = st.button(label='Submit')
-
-            if st.button('Process'):
+            if st.button('Submit'):
                 for i in df.index:
                     content_to_summarize = df.loc[i, selected_column]
                     st.write(content_to_summarize)
