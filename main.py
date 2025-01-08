@@ -34,7 +34,9 @@ if uploaded_file is not None:
     if headers is not None:
         col1, col2, col3 = st.columns(3)
         with col1:
-            st.selectbox(label='Select Column to Summarize', options=headers, )
+            st.selectbox(label='Select Column to Summarize', options=headers)
+        with col2:
+            st.button(label='Submit')
 
 
     # # # Creating a form in the Streamlit app for user input
