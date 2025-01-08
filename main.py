@@ -38,17 +38,17 @@ if uploaded_file is not None:
             if st.button('Submit'):
                 
                 wb = openpyxl.Workbook('summarized_sample.xlsx')
-                wb.save('summarized_sample.xlsx')
+                wb.save('C:\\summarized_sample.xlsx')
                 wb.close()
 
-                df['Summary'] = ''
-                for i in df.index:
-                    content_to_summarize = df.loc[i, selected_column]
-                    df.loc[i, 'Summary'] = generate_response(f'{api_prompt()}\n\n{content_to_summarize}')
+                # df['Summary'] = ''
+                # for i in df.index:
+                #     content_to_summarize = df.loc[i, selected_column]
+                #     df.loc[i, 'Summary'] = generate_response(f'{api_prompt()}\n\n{content_to_summarize}')
 
-                writer = pd.ExcelWriter('summarized_sample.xlsx', engine='openpyxl', mode='a')
-                df.to_excel(writer, sheet_name='CLEANED', index=False)
-                writer.close()
+                # writer = pd.ExcelWriter('summarized_sample.xlsx', engine='openpyxl', mode='a')
+                # df.to_excel(writer, sheet_name='CLEANED', index=False)
+                # writer.close()
                      
 
 
