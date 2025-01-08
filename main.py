@@ -11,21 +11,21 @@ openai_api_key = st.secrets("openai_key")
 st.success(openai_api_key)
 
 # Defining a function to generate a response using the OpenAI model
-def generate_response(input_text):
-    # Initializing the OpenAI model with a specified temperature and API key
-    llm = OpenAI(temperature=0.7, openai_api_key=openai_api_key)
-    # Displaying the generated response as an informational message in the Streamlit app
-    st.info(llm(input_text))
+# def generate_response(input_text):
+#     # Initializing the OpenAI model with a specified temperature and API key
+#     llm = OpenAI(temperature=0.7, openai_api_key=openai_api_key)
+#     # Displaying the generated response as an informational message in the Streamlit app
+#     st.info(llm(input_text))
 
-# Creating a form in the Streamlit app for user input
-with st.form('my_form'):
-    # Adding a text area for user input with a default prompt
-    text = st.text_area('Enter text:', '')
-    # Adding a submit button for the form
-    submitted = st.form_submit_button('Submit')
-    # Displaying a warning if the entered API key does not start with 'sk-'
-    if not openai_api_key.startswith('sk-'):
-        st.warning('Please enter your OpenAI API key!', icon='⚠')
-    # If the form is submitted and the API key is valid, generate a response
-    if submitted and openai_api_key.startswith('sk-'):
-        generate_response(text)
+# # Creating a form in the Streamlit app for user input
+# with st.form('my_form'):
+#     # Adding a text area for user input with a default prompt
+#     text = st.text_area('Enter text:', '')
+#     # Adding a submit button for the form
+#     submitted = st.form_submit_button('Submit')
+#     # Displaying a warning if the entered API key does not start with 'sk-'
+#     if not openai_api_key.startswith('sk-'):
+#         st.warning('Please enter your OpenAI API key!', icon='⚠')
+#     # If the form is submitted and the API key is valid, generate a response
+#     if submitted and openai_api_key.startswith('sk-'):
+#         generate_response(text)
