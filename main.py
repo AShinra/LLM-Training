@@ -33,7 +33,7 @@ if uploaded_file is not None:
 
     if headers is not None:
         my_columns = st.columns(3)
-        with my_columns(1):
+        with my_columns[1]:
             st.selectbox(label='Select Column to Summarize', options=headers, )
 
 
