@@ -54,7 +54,6 @@ if uploaded_file is not None:
                 df.to_excel(writer, sheet_name='CLEANED', index=False)
                 writer.close()
 
-                st.download_button(label='Download File', )
                 result_file = open(_file, 'rb')
                 st.success(f':red[NOTE:] Downloaded file will go to the :red[Downloads Folder]')
                 st.download_button(label='📥 Download Excel File', data= result_file, file_name= f'summarized.xlsx')   
