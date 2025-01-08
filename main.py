@@ -25,11 +25,11 @@ st.title('Article Summarizer 🤖')
 openai_api_key = st.secrets["openai"]
 
 # get the uploaded file
-upload_file = upload_xlsx_file()
+uploaded_file = upload_xlsx_file()
 
-if upload_file is not None:
+if uploaded_file is not None:
 
-    headers = get_headers(upload_file)
+    headers = get_headers(uploaded_file)
 
     st.write(headers)
 
