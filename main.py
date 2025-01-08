@@ -15,8 +15,7 @@ def generate_response(input_text):
     return llm(input_text)
 
 def api_prompt():
-    text = f'''Role: You are tasked to create a summary from the given article based on the following criteria
-                1. Create a summary based on {client}'''
+    text = f'''Role: You are tasked to create a summary from the given article based on the following criteria'''
     return text
 
 client = 'Manulife'
