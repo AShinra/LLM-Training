@@ -9,7 +9,7 @@ import os
 # Defining a function to generate a response using the OpenAI model
 def generate_response(input_text):
     # Initializing the OpenAI model with a specified temperature and API key
-    llm = OpenAI(temperature=0.7, openai_api_key=openai_api_key)
+    llm = OpenAI(temperature=0.5, openai_api_key=openai_api_key)
     # Displaying the generated response as an informational message in the Streamlit app
     # st.write(llm(input_text))
     return llm(input_text)
@@ -18,7 +18,7 @@ def api_prompt():
     text = f'''Role: You are tasked to create a summary from the given article based on the following criteria
                 1. Remove all unnecessary spaces from the summary.
                 2. Do not place the word Summary at the beginning of the summarized article.
-                3. Summary should revolve around the {client} and it's endorsers and spokespersons.'''
+                3. Summary should revolve around the {client} along with it's endorsers and spokespersons.'''
     return text
 
 client = 'Manulife'
