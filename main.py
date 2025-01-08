@@ -8,7 +8,7 @@ def generate_response(input_text):
     # Initializing the OpenAI model with a specified temperature and API key
     llm = OpenAI(temperature=0.7, openai_api_key=openai_api_key)
     # Displaying the generated response as an informational message in the Streamlit app
-    st.info(llm(input_text))
+    st.write(llm(input_text))
 
 def api_prompt():
     text = '''Role: You are tasked to create a summary from the given article based on the following criteria
