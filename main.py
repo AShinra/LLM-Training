@@ -38,6 +38,9 @@ if uploaded_file is not None:
                 for i in df.index:
                     content_to_summarize = df.loc[i, selected_column]
                     df.loc[i, 'Summary'] = generate_response(f'{api_prompt()}\n\n{content_to_summarize}')
+
+df.to_excel('Sample_Summarized.xlsx', index=False)
+
                      
 
 
