@@ -29,13 +29,17 @@ uploaded_file = upload_xlsx_file()
 
 if uploaded_file is not None:
 
-    headers = get_headers(uploaded_file)
+    df, headers = get_headers(uploaded_file)
 
     if headers is not None:
         col1, col2, col3 = st.columns(3)
         with col1:
-            st.selectbox(label='Select Column to Summarize', options=headers)
+            selected_column = st.selectbox(label='Select Column to Summarize', options=headers)
             st.button(label='Submit')
+
+            if 'Submit':
+                for i in df.index:
+                    st.write(df.loc[i, 'Content'])
 
 
     # # # Creating a form in the Streamlit app for user input

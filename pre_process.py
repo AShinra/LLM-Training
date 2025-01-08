@@ -9,4 +9,4 @@ def get_headers(uploaded_file):
 
     headers = df.columns
     
-    return headers
+    return df, headers
