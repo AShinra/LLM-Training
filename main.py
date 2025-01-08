@@ -39,23 +39,25 @@ if uploaded_file is not None:
             if st.button('Submit'):
                 
                 _path = os.getcwd()
-                st.write(_path)
                 _file = f'{_path}/summarized_sample.xlsx'
-                st.write(_file)
                 wb = openpyxl.Workbook(_file)
                 wb.save(_file)
                 wb.close()
 
-                # df['Summary'] = ''
-                # for i in df.index:
-                #     content_to_summarize = df.loc[i, selected_column]
-                #     df.loc[i, 'Summary'] = generate_response(f'{api_prompt()}\n\n{content_to_summarize}')
+                df['Summary'] = ''
+                for i in df.index:
+                    content_to_summarize = df.loc[i, selected_column]
+                    df.loc[i, 'Summary'] = generate_response(f'{api_prompt()}\n\n{content_to_summarize}')
                 
-                # st.dataframe(df)
-                # writer = pd.ExcelWriter('summarized_sample.xlsx', engine='openpyxl', mode='a')
-                # df.to_excel(writer, sheet_name='CLEANED', index=False)
-                # writer.close()
-                     
+                st.dataframe(df)
+                writer = pd.ExcelWriter(_file, engine='openpyxl', mode='a')
+                df.to_excel(writer, sheet_name='CLEANED', index=False)
+                writer.close()
+
+                st.download_button(label='Download File', )
+                result_file = open(_file, 'rb')
+                st.success(f':red[NOTE:] Downloaded file will go to the :red[Downloads Folder]')
+                st.download_button(label='📥 Download Excel File', data= result_file, file_name= f'summarized.xlsx')   
 
 
 
