@@ -35,7 +35,7 @@ if uploaded_file is not None:
         col1, col2, col3 = st.columns(3)
         with col1:
             selected_column = st.selectbox(label='Select Column to Summarize', options=headers)
-            st.button(label='Process')
+            Process = st.button(label='Submit')
 
             if st.button('Process'):
                 for i in df.index:
