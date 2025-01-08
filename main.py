@@ -15,9 +15,11 @@ def generate_response(input_text):
     return llm(input_text)
 
 def api_prompt():
-    text = '''Role: You are tasked to create a summary from the given article based on the following criteria
-                1. Create a summary based on the keywords mentioned'''
+    text = f'''Role: You are tasked to create a summary from the given article based on the following criteria
+                1. Create a summary based on {client}'''
     return text
+
+client = 'Manulife'
 
 # Setting the title of the Streamlit application
 st.title('Article Summarizer 🤖')
