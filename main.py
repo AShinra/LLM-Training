@@ -3,6 +3,7 @@ from langchain.llms import OpenAI
 from file_uploader import upload_xlsx_file
 from pre_process import get_headers
 import pandas as pd
+import openpyxl
 
 # Defining a function to generate a response using the OpenAI model
 def generate_response(input_text):
@@ -35,12 +36,19 @@ if uploaded_file is not None:
         with col1:
             selected_column = st.selectbox(label='Select Column to Summarize', options=headers)
             if st.button('Submit'):
+                
+                wb = openpyxl.Workbook('summarized_sample.xlsx')
+                wb.save('summarized_sample.xlsx')
+                wb.close()
+
                 df['Summary'] = ''
                 for i in df.index:
                     content_to_summarize = df.loc[i, selected_column]
                     df.loc[i, 'Summary'] = generate_response(f'{api_prompt()}\n\n{content_to_summarize}')
 
-                df.to_excel('Sample_Summarized.xlsx')
+                writer = pd.ExcelWriter('summarized_sample.xlsx', engine='openpyxl', mode='a')
+                df.to_excel(writer, sheet_name='CLEANED', index=False)
+                writer.close()
                      
 
 
