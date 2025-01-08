@@ -4,6 +4,7 @@ from file_uploader import upload_xlsx_file
 from pre_process import get_headers
 import pandas as pd
 import openpyxl
+import os
 
 # Defining a function to generate a response using the OpenAI model
 def generate_response(input_text):
@@ -37,16 +38,19 @@ if uploaded_file is not None:
             selected_column = st.selectbox(label='Select Column to Summarize', options=headers)
             if st.button('Submit'):
                 
-                wb = openpyxl.Workbook('summarized_sample.xlsx')
-                wb.save('summarized_sample.xlsx')
+                _path = os.getcwd()
+                st.write(_path)
+                _file = f'{_path}/summarized_sample.xlsx'
+                wb = openpyxl.Workbook(_file)
+                wb.save(_file)
                 wb.close()
 
-                df['Summary'] = ''
-                for i in df.index:
-                    content_to_summarize = df.loc[i, selected_column]
-                    df.loc[i, 'Summary'] = generate_response(f'{api_prompt()}\n\n{content_to_summarize}')
+                # df['Summary'] = ''
+                # for i in df.index:
+                #     content_to_summarize = df.loc[i, selected_column]
+                #     df.loc[i, 'Summary'] = generate_response(f'{api_prompt()}\n\n{content_to_summarize}')
                 
-                st.dataframe(df)
+                # st.dataframe(df)
                 # writer = pd.ExcelWriter('summarized_sample.xlsx', engine='openpyxl', mode='a')
                 # df.to_excel(writer, sheet_name='CLEANED', index=False)
                 # writer.close()
