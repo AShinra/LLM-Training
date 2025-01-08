@@ -2,6 +2,7 @@ import streamlit as st
 from langchain.llms import OpenAI
 from file_uploader import upload_xlsx_file
 from pre_process import get_headers
+import pandas as pd
 
 # Defining a function to generate a response using the OpenAI model
 def generate_response(input_text):
@@ -39,8 +40,9 @@ if uploaded_file is not None:
                     content_to_summarize = df.loc[i, selected_column]
                     df.loc[i, 'Summary'] = generate_response(f'{api_prompt()}\n\n{content_to_summarize}')
 
-                df.to_excel('C:/Sample_Summarized.xlsx')
-
+                # df.to_excel('C:/Sample_Summarized.xlsx')
+                with pd.ExcelWriter('summarized_sample.xlsx') as writer:
+                    df.to_excel(writer)
                      
 
 
