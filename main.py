@@ -39,7 +39,8 @@ if uploaded_file is not None:
 
             if 'Submit':
                 for i in df.index:
-                    st.write(df.loc[i, 'Content'])
+                    content_to_summarize = df.loc[i, selected_column]
+                    st.write(content_to_summarize)
 
 
     # # # Creating a form in the Streamlit app for user input
