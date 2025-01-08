@@ -41,6 +41,7 @@ if uploaded_file is not None:
                 _path = os.getcwd()
                 st.write(_path)
                 _file = f'{_path}/summarized_sample.xlsx'
+                st.write(_file)
                 wb = openpyxl.Workbook(_file)
                 wb.save(_file)
                 wb.close()
