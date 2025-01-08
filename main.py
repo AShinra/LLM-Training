@@ -1,5 +1,6 @@
 import streamlit as st
 from langchain.llms import OpenAI
+from file_uploader import upload_xlsx_file
 
 # Defining a function to generate a response using the OpenAI model
 def generate_response(input_text):
@@ -21,6 +22,9 @@ st.title('Article Summarizer 🤖')
 
 # get the API KEY
 openai_api_key = st.secrets["openai"]
+
+# get the uploaded file
+upload_file = upload_xlsx_file()
 
 # # Creating a form in the Streamlit app for user input
 with st.form('my_form'):
