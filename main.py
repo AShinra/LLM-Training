@@ -16,9 +16,16 @@ def generate_response(input_text):
 
 def api_prompt():
     text = f'''Role: You are tasked to create a summary from the given article based on the following criteria
-                1. Remove all unnecessary spaces from the summary.
-                2. Do not place the word Summary at the beginning of the summarized article.
-                3. Summary should revolve around the {client} along with it's endorsers and spokespersons.'''
+    
+                "Read the following story or article carefully. Summarize it in a detailed and structured way, highlighting the key points, main events, and core themes. Ensure the summary captures:
+
+                1. The central idea or main argument.
+                2. Important supporting details, including relevant facts, figures, and examples.
+                3. Any significant quotes or dialogue that add value to the story.
+                4. The overall tone and purpose of the article.
+                5. Key takeaways or lessons (if applicable).
+                
+                Make the summary clear and concise, while preserving the essence of the original content. Structure it in complete paragraphs, with transitions that ensure smooth readability."'''
     return text
 
 client = 'Manulife'
